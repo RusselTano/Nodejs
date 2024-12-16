@@ -1,24 +1,26 @@
 const http = require("http");
+const fs = require("fs");
+const port = 3100;
 
-const server = http.createServer();
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/html", "utf-8");
 
-server.on("request", (req, res) => {
-  res.writeHead(200, { "Content-Type": "text/html" });
-  // res.write("Hello World");
-  res.end(`
-      <!DOCTYPE html>
-      <html>
+  if (req.url === "/style.css") {
+    const css = fs.readFileSync("style.css", "utf-8");
+    res.setHeader("Content-Type", "text/css");
+    res.end(css);
+  }
 
-        <head>
-          <title>My First Node Server</title>
-        </head>
-
-        <body>
-          <h1>Hello World</h1>
-          <p>This is a Node.js server</p>
-        </body>
-
-      </html>
-    `);
+  const fileContent = fs.readFileSync("index.html", "utf-8");
+  const template = fileContent
+    .replace("{{name}}", "John Doe")
+    .replace("{{framework}}", "Node.js");
+  res.end(template);
 });
-server.listen(3000);
+
+server.listen(port, () => {
+  console.log(
+    `Server is running on port ${port} you can access it at http://localhost:${port}`
+  );
+});
