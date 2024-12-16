@@ -1,14 +1,24 @@
 const http = require("http");
 
-const server = http.createServer((req, res) => {
-  //req = request, res = response
-  console.log("I hear you! Thanks for calling me");
-  res.end("Hello World");
+const server = http.createServer();
+
+server.on("request", (req, res) => {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  // res.write("Hello World");
+  res.end(`
+      <!DOCTYPE html>
+      <html>
+
+        <head>
+          <title>My First Node Server</title>
+        </head>
+
+        <body>
+          <h1>Hello World</h1>
+          <p>This is a Node.js server</p>
+        </body>
+
+      </html>
+    `);
 });
-/**
- const server = http.createServer();
-server.on('request', (request, response) => {
-  // la même chose qu'avant
-}); */
 server.listen(3000);
- 
