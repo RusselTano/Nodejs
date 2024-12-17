@@ -14,20 +14,17 @@ header {
   padding: 1em;
 }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
+nav {
 
-nav li {
-  display: inline-block;
-  margin-right: 2em;
-}
+  & li {
+    display: inline-block;
+    margin-right: 2em;
+  }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
+  & a {
+    color: #fff;
+    text-decoration: none;
+  }
 }
 
 main {

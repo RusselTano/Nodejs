@@ -1,34 +1,66 @@
-const path = require('path');
-const express = require('express');
+const path = require("path");
+const fs = require("fs");
+const express = require("express");
+const { error } = require("console");
 const app = express();
-const port = 3500;
-// const http = require('http');
-// const server = http.createServer(app);
-// const io = require('socket.io')(server);
-const test = path.dirname("./app.js");
-// const test2 = path.join("./index.html");
-console.log("Methodes de l'objet path : ");
-console.log("basename(path[, ext]) : " + path.basename(__filename) + " - Renvoie le nom du fichier sans chemin");
-console.log("delimiter : " + path.delimiter + " - Caractere de separation des chemins");
-console.log("dirname(path) : " + path.dirname(__filename) + " - Renvoie le chemin sans le nom du fichier");
-console.log("extname(path) : " + path.extname(__filename) + " - Renvoie l'extension du fichier");
-console.log("format(pathObject) : " + path.format({dir: 'C:\\path\\dir', base: 'file.txt'}) + " - Formate un objet path en chaine de caractere");
-console.log("isAbsolute(path) : " + path.isAbsolute(__filename) + " - Renvoie si le chemin est absolu");
-console.log("join([...paths]) : " + path.join(__dirname, '..', 'dist') + " - Concatene des chemins");
-console.log("normalize(path) : " + path.normalize(__filename) + " - Normalise un chemin");
-console.log("parse(path) : " + path.parse(__filename) + " - Renvoie un objet path");
-console.log("relative(from, to) : " + path.relative(__dirname, __filename) + " - Renvoie le chemin relatif entre 2 chemins");
-console.log("resolve([...paths]) : " + path.resolve(__dirname, '..', 'dist') + " - Renvoie le chemin absolu a partir de plusieurs chemins");
-console.log("sep : " + path.sep + " - Caractere de separation des chemins");
-console.log("win32 : " + path.win32 + " - Renvoie si le chemin est sous windows");
+const initialPort = 3500;
 
-console.log(test);
-// console.log(test2);
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.set("views", path.join(__dirname, "views"));
+app.set('view engine', 'toto');
+app.engine("toto", (filePath, options, callback) => {
+  fs.readFile(filePath, (error, data) => {
+    if (error) {
+      callback(error);
+    }
+    const template = data.toString().replace("%NodeJS", options.name);
+    callback(null, template);
+  });
 });
-
-app.listen(port, () => {
-  console.log(`Server listening on port ${port} http://localhost:${port}`);
+app.get("/", (req, res) => {
+  res.render("index", {
+    name: "Tano",
+  });
 });
+function startServer(port) {
+  // app.get('/', (req, res) => {
+  //   res.render('index.toto', {
+  //     name: 'NodeJS',
+  //   });
+  //   // res.status(200);
+  //   // res.set({
+  //   //   'Content-Type': 'text/html',
+  //   //   'x-my-header': '123',
+  //   //   'x-header-2': '1234',
+  //   // });
+  //   // res.send(
+  //   //   `<!DOCTYPE html>
+  //   //   <html lang="en">
+  //   //     <head>
+  //   //       <meta charset="UTF-8">
+  //   //       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  //   //       <title>NodeJS</title>
+  //   //     </head>
+  //   //     <body>
+  //   //       <h1>NodeJS</h1>
+  //   //     </body>
+  //   //   </html>`
+  //   // );
+  // });
+
+  const server = app
+    .listen(port)
+    .on("error", (e) => {
+      if (e.code === "EADDRINUSE") {
+        console.log(`Port ${port} is busy, trying port ${port + 1}`);
+        server.close();
+        startServer(port + 1);
+      } else {
+        console.error("Server error:", e);
+      }
+    })
+    .on("listening", () => {
+      console.log(`Server listening on port ${port} http://localhost:${port}`);
+    });
+}
+
+startServer(initialPort);
