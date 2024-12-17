@@ -45,3 +45,6 @@ app.post("/contact", (req, res) => {
 app.listen(port).on("listening", () => {
   console.log(`Server listening on port ${port} http://localhost:${port}`);
 });
+
+// 
+// Chapitre 9 : Le routing sur Express
