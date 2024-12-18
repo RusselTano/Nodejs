@@ -1,6 +1,9 @@
 const express = require("express");
+const api = require("./api");
 const router = express.Router();
 const Student = require("../database/models/student.model");
+
+router.use("/api", api);
 
 // Page d'accueil
 router.get("/", (req, res) => {

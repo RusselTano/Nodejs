@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
+// const students = require("./students");
 const Student = require("../database/models/student.model");
 
-router.get("/students", (req, res) => {  
+// Route pour obtenir la liste des étudiants
+router.get("/students", (req, res) => {
   Student.find({})
     .exec()
     .then(students => {
