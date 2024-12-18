@@ -5,6 +5,15 @@ Super idée de passer à MongoDB ! 😎 Puisque tu as déjà des notions en SQL,
 ## **1. MongoDB, c’est quoi ?**
 MongoDB est une **base de données NoSQL**, ce qui signifie qu’elle est orientée documents, et non relationnelle comme SQL. Les données sont stockées dans des **documents JSON** (ou BSON, qui est juste une version binaire de JSON). Il n’y a pas de **tables**, mais des **collections**.
 
+### **1.1 Lance mongodb
+<p>
+Once MongoDB is installed, you'll need to start it. On Windows, you can:
+
+Open Services (Win + R, type services.msc)
+Look for "MongoDB" service and start it OR
+Run MongoDB as a service using the command prompt as administrator: net start MongoDB
+</p>
+
 ---
 
 ## **2. Comparaison SQL vs MongoDB**
@@ -178,5 +187,3 @@ MongoDB permet de faire des requêtes complexes sans "jointures" SQL grâce à d
   ```
 
 ---
-
-En résumé, **MongoDB est super flexible** par rapport à SQL. Une fois que tu comprends ses concepts de base, tu pourras gérer des données complexes facilement. 😎 Si tu veux pratiquer, dis-moi ce que tu veux coder, et on le fait ensemble ! 🚀
