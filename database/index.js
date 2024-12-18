@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
+const schema = mongoose.Schema;
 
 mongoose
-  .connect("mongodb://localhost:27017/devBD")
-  .then(async () => {
-    console.log("Connexion à la base de données etablie");
+  .connect("mongodb://didicode:123@127.0.0.1:27017/devDB")
+  .then(() => {
+    console.log("✅ Connecté à MongoDB avec succès!");
   })
   .catch((err) => {
-    console.log("Connexion à la base de données echouée");
-    console.log(err);
+    console.error("❌ Erreur de connexion à MongoDB:", err.message);
   });
