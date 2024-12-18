@@ -10,29 +10,38 @@ mongoose
     console.error("❌ Erreur de connexion à MongoDB:", err.message);
   });
 
-// Définition du Schema
-const userSchema = schema({
+// Définition des Schemas
+const coursesSchema = schema({
+  name: String,
+  description: String,
+});
+const studentSchema = schema({
   name: String,
   email: String,
   password: String,
+  courses: { type: [coursesSchema], default: [] },
 });
 
 // Création du modeèle
-const User = mongoose.model("User", userSchema);
+const Student = mongoose.model("Student", studentSchema);
 
 // Création d'un nouvel utilisateur
-const user = new User({
+const student = new Student({
   name: "John Doe",
   email: "h3d0m@example.com",
   password: "password123",
+  courses: [
+    { name: "JavaScript", description: "Cours de JS" },
+    { name: "Node.js", description: "Cours de Node" },
+  ],
 });
 
-User.findOne({ email: user.email })
-  .then((userFound) => {
-    if (userFound) {
+Student.findOne({ email: student.email })
+  .then((studentFound) => {
+    if (studentFound) {
       console.log("❌ Erreur, l'utilisateur existe déjà!");
     } else {
-      return user
+      return student
         .save()
         .then(() => {
           console.log("✅ Utilisateur enregistré avec succès!");
@@ -51,17 +60,17 @@ User.findOne({ email: user.email })
 
 console.log("🚀 Serveur en cours d'execution...");
 
-// User.findOne({ email: user.email })
-//   .then((userFound) => {
-//     if (userFound) {
-//       console.log("✅ Utilisateur trouvé:", userFound);
-//     } else {
-//       console.log("❌ Utilisateur non trouvé");
-//     }
-//   })
-//   .catch((err) => {
-//     console.error("❌ Erreur lors de la recherche de l'utilisateur:", err);
-//   });
+Student.findOne({ email: student.email })
+  .then((studentFound) => {
+    if (studentFound) {
+      console.log("✅ Utilisateur trouvé:", studentFound);
+    } else {
+      console.log("❌ Utilisateur non trouvé");
+    }
+  })
+  .catch((err) => {
+    console.error("❌ Erreur lors de la recherche de l'utilisateur:", err);
+  });
 
 /**
  * connection classique
@@ -80,7 +89,6 @@ console.log("🚀 Serveur en cours d'execution...");
   const uri = 'mongodb://<your_user>:<your_password>@<your_host>:<your_port>/ma_base';
 
    */
-
 
 /**
 Les méthodes disponibles sur les Query
