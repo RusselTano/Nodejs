@@ -6,7 +6,6 @@
 div{
   max-width: 1200px;
   margin: 0 auto;
-  background: #ccc;
   padding: 10px;
 }
 
@@ -38,4 +37,26 @@ main {
   flex-direction: column;
   align-items: center;
   padding: 2em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
+  row-gap: 1em;
+}
+
+form button {
+  padding: 0.5em 1em;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+form button:hover {
+  box-shadow: #222 0px 0px 2px 2px;
 }

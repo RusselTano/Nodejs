@@ -9,13 +9,14 @@ const courseSchema = new schema({
 
 const studentSchema = new schema({
   name: String,
-  age: Number,
   email: String,
-  courses: [courseSchema]  // Embarquer directement le schéma des cours
+  password: String,
+  courses: {
+    type: [courseSchema],
+    default: [{ name: "JavaScript", description: "Cours de JavaScript" }]
+  }
 },{
   timestamps: true
 });
 
-const Student = mongoose.model("student", studentSchema);
-module.exports = Student;
-
+module.exports = mongoose.model("student", studentSchema);

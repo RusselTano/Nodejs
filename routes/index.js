@@ -44,4 +44,52 @@ router.post("/contact", (req, res) => {
   res.send("Merci pour votre message");
 });
 
+// register page
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
+router.post("/register", (req, res) => {
+  const body = req.body;
+  const student = new Student({
+    name: body.name,
+    email: body.email,
+    password: body.password
+  });
+  student.save()
+    .then(() => {
+      res.redirect("/login");
+    })
+    .catch(err => {
+      res.status(500).render("error", { error: err.message });
+    });
+});
+
+// login page
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  Student.findOne({ email: email })
+    .then(student => {
+      if (!student || student.password !== password) {
+        return res.status(400).render("login", {
+          error: "Email ou mot de passe incorrect"
+        });
+      }
+      res.redirect("/");
+    })
+    .catch(err => {
+      res.status(500).render("login", {
+        error: "Une erreur est survenue"
+      });
+    });
+});
+
 module.exports = router;
+
+// Le module Util de Node.js est un ensemble d'utilitaires utiles pour le développement.
+// console.log(util.inspect(errors, { compact: true, depth: 5, breakLength: 80, colors: true }));

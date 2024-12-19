@@ -1,0 +1,9 @@
+extends layout.pug
+
+block content
+  h1 Inscription
+  form(action="/register" method="post")
+    input(type="text" name="name" placeholder="Nom")
+    input(type="email" name="email" placeholder="Email")
+    input(type="password" name="password" placeholder="Mot de passe")
+    button(type="submit") S'inscrire
