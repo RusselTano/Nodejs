@@ -36,21 +36,21 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-router.post("/register", (req, res) => {
-  const body = req.body;
-  const student = new Student({
-    name: body.name,
-    email: body.email,
-    password: body.password
-  });
-  student.save()
-    .then(() => {
-      res.redirect("/login");
-    })
-    .catch(err => {
-      res.status(500).render("error", { error: err.message });
-    });
-});
+// router.post("/register", (req, res) => {
+//   const body = req.body;
+//   const student = new Student({
+//     name: body.name,
+//     email: body.email,
+//     password: body.password
+//   });
+//   student.save()
+//     .then(() => {
+//       res.redirect("/login");
+//     })
+//     .catch(err => {
+//       res.status(500).render("error", { error: err.message });
+//     });
+// });
 
 // login page
 router.get("/login", (req, res) => {
