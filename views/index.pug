@@ -3,48 +3,10 @@ extends layout.pug
 block content
   h1 Hello World !
 
-  div(class="test")
-    p
-      | Ligne 1,
-      | ligne 2,
-      | ligne 3.
-  div(class=['test', 'test2'])
-    p.
-       Ligne1,
-       Ligne2,
-       Ligne3.
-  div(style="color:white;background:black;")
-    p Bonjour depuis le div3
-  div(style={color:'white', background:'green', padding:'10px'})
-    p Bonjour depuis le div4
-  .container 
-    .row.row1(style="display:flex;flex-wrap:wrap")
-      .col.col-1 
-        label(for="maCheckbox") col1
-        input(type='checkbox' name='maCheckbox' id='maCheckbox' checked )
-      .col.col-2 
-        p #{name}
-        p= name
-      .col.col-3 
-        if authenticated 
-          p Je suis authentifié
-        else
-          p Je suis anonyme
-    .row.row2
-      .col.col-1 
-        case friendsCount
-          when 0
-            p Aucun ami
-          when 1
-            p 1 ami
-          default
-            p #{friendsCount} amis
-      .col.col-2 
-        each product, index in products
-          p #{index + 1} - #{product.name} - #{product.price}$
-      .col.col-3 
-        a(href='https://google.com') Google.com
-        img(src='/images/cookies.jpg' alt='cookie')
+  ul
+    each student in students
+      li #{student.name} - #{student.email} ans
+
   style.
     .row {
       display: flex;

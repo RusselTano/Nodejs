@@ -1,27 +1,14 @@
-const express = require("express");
+const router = require("express").Router();
 const api = require("./api");
-const router = express.Router();
 const Student = require("../database/models/student.model");
 
 router.use("/api", api);
 
 // Page d'accueil
 router.get("/", (req, res) => {
-  Student.find({})
-    .exec()
+  Student.find()
     .then(students => {
-      res.render("index", {
-        name: "Dylane",
-        authenticated: true,
-        students: students,
-        friends: ["Alice", "Bob", "Charlie"],
-        friendsCount: 3,
-        products: [
-          { name: "Laptop", price: 1000 },
-          { name: "Smartphone", price: 500 },
-          { name: "Tablet", price: 300 },
-        ],
-      });
+      res.render("index", { students });
     })
     .catch(err => {
       res.status(500).render("error", { error: err.message });
