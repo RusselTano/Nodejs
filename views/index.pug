@@ -1,32 +1,35 @@
-extends layout.pug
+extends layout
 
 block content
   h1 Hello World !
 
-  ul
-    each student in students
-      li #{student.name} - #{student.email} ans
+  form(action="/api/students" method="GET")
+    input(type="search" name="search" placeholder="Rechercher un étudiant")
+
+  include partials/student-list
 
   style.
-    .row {
+    p {
+      padding:0;
+      margin:0;
+    }
+    .students {
+      list-style: none;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 10px;
-    }
-    .container {
+      padding:20px;
+      max-width:900px;
       margin: 0 auto;
-      //- background: #c33;
-      padding: 10px;
     }
-    .col {
-      flex: 1 1 200px;
-      padding: 10px;
-      background: #fff;
+    .student {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
       border: 1px solid #ccc;
       border-radius: 5px;
+      padding: 10px;
+      width: 300px;
+      flex-grow : 1;
+      text-align:left;
     }
-    img {
-      width: 200px;
-    }
-
