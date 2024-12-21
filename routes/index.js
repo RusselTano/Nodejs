@@ -25,6 +25,8 @@ console.log(req.body);
     });
 });
 
+
+
 // Page À propos
 router.get("/about", (req, res) => {
   res.render("about");

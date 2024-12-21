@@ -1,7 +1,8 @@
 const path = require("path");
 const express = require("express");
-const app = express();
+const multer = require("multer");
 const routing = require("./routes");
+const app = express();
 const port = 3300;
 
 exports.app = app;
@@ -18,6 +19,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(routing);
+
+app.post("/file", (req, res) => {
+  console.log(req.body);
+  res.end();
+});
+
 
 app.listen(port).on("listening", () => {
   console.log(`Server listening on port ${port} http://localhost:${port}`);
