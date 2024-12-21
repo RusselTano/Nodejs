@@ -2,10 +2,11 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const routing = require("./routes");
-const port = 3100;
+const port = 3200;
 
 exports.app = app;
 require("./config/session.config");
+require("./config/passport.config");
 
 require("./database"); // Connexion à la base de données MongoDB
 

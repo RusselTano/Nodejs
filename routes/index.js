@@ -9,10 +9,12 @@ router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
 
 
+
 router.use("/api", api);
 
 // Page d'accueil
 router.get("/", (req, res) => {
+console.log(req.body);
   Student.find()
     .then(students => {
       res.cookie("name", "John");

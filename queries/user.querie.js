@@ -16,3 +16,7 @@ exports.createUser = async body => {
     console.log(err.message);
   }
 };
+
+exports.findUserPerEmail = async (email) => {
+  User.findOne({ 'local.email': email })
+};
