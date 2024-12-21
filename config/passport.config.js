@@ -7,7 +7,7 @@ const {findUserPerEmail} = require("../queries/user.querie");
 app.use(passport.initialize());
 app.use(passport.session());
 
-// La méthode passport.serialize() sert à spécifier l'identifiant unique relatif au user stocké dans l'objet session dans la base de données, et qui sera utilisé par la méthode deserialize() pour le récupérer
+// La méthode passport.serialize() sert à spécifier l'identifiant unique relatif au user stocké dans l'objet session dans la base de données, et qui sera utilisé par la méthode deserialize() pour le récupérer   
 passport.serializeUser((user, done) => {
   done(null, user.id); // stocke id de l'utilisateur
 });
@@ -38,7 +38,7 @@ passport.use('local', new LocalStrategy({
       }
     }
     else{
-      return done(null, false, { message: 'Email incorrect' });
+      return done(null, false, { message: 'email incorrect' });
     }
   } catch (err) {
     return done(err);

@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const routing = require("./routes");
-const port = 3200;
+const port = 3300;
 
 exports.app = app;
 require("./config/session.config");

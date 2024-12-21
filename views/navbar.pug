@@ -4,13 +4,17 @@ nav.navbar(style="background: #333; color: white; padding: 10px;")
       a(href="/", style="color: white; text-decoration: none;") Accueil
     //- li 
     //-   a(href="/about", style="color: white; text-decoration: none;") À propos
-    li 
-      a(href="/contact", style="color: white; text-decoration: none;") Contact
+    //- li 
+    //-   a(href="/contact", style="color: white; text-decoration: none;") Contact
     //- li 
     //-   a(href="/login", style="color: white; text-decoration: none;") Connexion
     //- li 
     //-   a(href="/register", style="color: white; text-decoration: none;") Inscription
+
     li 
-      a(href="/users/new", style="color: white; text-decoration: none;") S'inscrire
+      a(href="/auth/signout", style="color: white; text-decoration: none;") deconnexion
+
     li 
-      a(href="/auth/signin/form", style="color: white; text-decoration: none;") Se connecter
+      a(href="/users/new", style="color: white; text-decoration: none;") inscription
+    li 
+      a(href="/auth/signin/form", style="color: white; text-decoration: none;") connexion

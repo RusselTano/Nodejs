@@ -2,7 +2,9 @@ extends layout.pug
 
 block content
   h1 Connexion
-  form(action="/login" method="post")
+  form(action="/auth/signin" method="post")
     input(type="email" name="email" placeholder="Email")
     input(type="password" name="password" placeholder="Mot de passe")
+    if error
+      p(style="color: red") #{error}
     button(type="submit") Se connecter
