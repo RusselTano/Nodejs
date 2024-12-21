@@ -5,5 +5,12 @@ exports.userNew = (req, res, next) => {
 }
 
 exports.userCreate = async (req, res, next) => {
-  res.end();
+  try{
+    const body = req.body;
+    const user = await User.createUser(body);
+    res.redirect("/login");
+    console.log(user);
+  } catch (err) {
+    next(err);
+  }
 }
