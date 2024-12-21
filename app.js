@@ -1,6 +1,19 @@
 const path = require("path");
 const express = require("express");
 const multer = require("multer");
+// const upload = multer({ dest: path.join(__dirname, "upload") });
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, "/upload"));
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+  }),
+});
+
 const routing = require("./routes");
 const app = express();
 const port = 3300;
@@ -20,11 +33,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routing);
 
-app.post("/file", (req, res) => {
+app.post("/file", upload.single("avatar"), (req, res) => {
   console.log(req.body);
+  console.log(req.file);
   res.end();
 });
-
 
 app.listen(port).on("listening", () => {
   console.log(`Server listening on port ${port} http://localhost:${port}`);
