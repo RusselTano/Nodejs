@@ -4,6 +4,9 @@ window.addEventListener("load", () => {
   const searchInput = document.querySelector('input[name="search"]');
   const studentsList = document.querySelector('.students');
 
+  console.log(document.cookie);
+  
+
   searchInput.addEventListener("input", async () => {
     try {
       const search = searchInput.value;

@@ -8,6 +8,7 @@ router.use("/api", api);
 router.get("/", (req, res) => {
   Student.find()
     .then(students => {
+      res.cookie("name", "John");
       res.render("index", { students });
     })
     .catch(err => {
