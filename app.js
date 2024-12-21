@@ -2,7 +2,10 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const routing = require("./routes");
-const port = 3300;
+const port = 4100;
+
+exports.app = app;
+require("./config/session.config");
 
 require("./database"); // Connexion à la base de données MongoDB
 

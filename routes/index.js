@@ -2,6 +2,13 @@ const router = require("express").Router();
 const api = require("./api");
 const Student = require("../database/models/student.model");
 
+const userRoutes = require('./user.routes');
+const authRoutes = require('./auth.routes');
+
+router.use('/users', userRoutes);
+router.use('/auth', authRoutes);
+
+
 router.use("/api", api);
 
 // Page d'accueil
