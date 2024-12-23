@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
 
+const {
+  MONGODB_USER,
+  MONGODB_PASSWORD,
+  MONGODB_URL,
+  MONGODB_DATABASE,
+} = process.env;
+
+
 /**
  * Configuration de la connexion MongoDB
  * @type {Object}
  */
-const MONGODB_URI = `mongodb://didicode:123@127.0.0.1:27017/devDB`;
+// const MONGODB_URI = `mongodb://didicode:123@127.0.0.1:27017/devDB`;
 
 /**
  * Établit la connexion à MongoDB
@@ -12,7 +20,7 @@ const MONGODB_URI = `mongodb://didicode:123@127.0.0.1:27017/devDB`;
  */
 async function connectToDatabase() {
   try {
-    await mongoose.connect(MONGODB_URI);
+    await mongoose.connect(`mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_URL}/${MONGODB_DATABASE}`);
     console.log(
       `✅ Connecté à MongoDB avec succès! [${new Date().toLocaleString()}]`
     );

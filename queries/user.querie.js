@@ -18,5 +18,9 @@ exports.createUser = async body => {
 };
 
 exports.findUserPerEmail = async (email) => {
-  User.findOne({ 'local.email': email })
+  return User.findOne({ 'local.email': email })
+};
+
+exports.findUserPerId = async (id) => {
+  return User.findOne({ _id: id });
 };

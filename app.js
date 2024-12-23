@@ -1,7 +1,15 @@
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const multer = require("multer");
-// const upload = multer({ dest: path.join(__dirname, "upload") });
+const cookieParser = require("cookie-parser");
+const routing = require("./routes");
+const app = express();
+exports.app = app;
+
+app.use(cookieParser());
+
+require("./config/jwt.config");
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -14,13 +22,6 @@ const upload = multer({
   }),
 });
 
-const routing = require("./routes");
-const app = express();
-const port = 3300;
-
-exports.app = app;
-require("./config/session.config");
-require("./config/passport.config");
 
 require("./database"); // Connexion à la base de données MongoDB
 
@@ -39,6 +40,8 @@ app.post("/file", upload.single("avatar"), (req, res) => {
   res.end();
 });
 
-app.listen(port).on("listening", () => {
-  console.log(`Server listening on port ${port} http://localhost:${port}`);
+app.listen(process.env.PORT).on("listening", () => {
+  console.log(
+    `Server listening on port ${process.env.PORT} http://localhost:${process.env.PORT}`
+  );
 });
